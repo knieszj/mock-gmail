@@ -8,9 +8,10 @@ class App extends Component {
         super(props);
         this.state = {
             emailData: [],
-            search: ''
+            emailMessage: []
         }   
     
+
     }
 
     async componentDidMount() {
@@ -35,8 +36,14 @@ class App extends Component {
     handleSubmit = (event) => {
         event.preventDefault();
         const message = event.target.emailInput.value;
-        this.sendEmail(message)
-        console.log("handleSubmit clicked", message)
+        this.setState({emailMessage: {
+            sender: 'sender',
+            recipient: 'recipient',
+            subject: 'subject',
+            message: message
+        }})
+        this.sendEmail(this.state.emaiemailMessagelSender)
+        console.log("handleSubmit clicked", this.state.emailMessage)
     }
 
     render() {
