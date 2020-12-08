@@ -26,13 +26,18 @@ class App extends Component {
                 <Router>
                     <nav>
                         <ul>
-                            <li><Link exact to={'/'}>All Emails</Link></li>
+                            <li><Link to={'/AllEmails'}>All Emails</Link></li>
                         </ul>
                     </nav>
 
                     <Switch>
-                        <Route path={'/'}>
+                        <Route path={'/AllEmails'}>
                             <HomePage emails={this.state.emailData}/>
+                        </Route>
+                        <Route>
+                           <div>
+                               
+                           </div>
                         </Route>
                     </Switch>
                 </Router>

@@ -1,19 +1,16 @@
-import {Component} from "react";
+import React from "react";
+import { useParams } from 'react-router-dom'
 
-class IndividualEmailPage extends Component {
-    constructor(props) {
-        super(props);
-
-    }
-
-
-    render() {
-        return (
-            <>
-            </>
-        )
-    }
-
+const IndividualEmailPage = ({data}) => {
+    const {emailsId} = useParams()
+    const email = data.find(email => email.id === Number(emailsId))
+    
+    return (
+        <>
+            <div>{email.subject}</div>
+        </>
+    )
+    
 }
 
-export default IndividualEmailPage;
+export default IndividualEmailPage
