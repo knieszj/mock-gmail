@@ -3,7 +3,7 @@ import {BrowserRouter, useRouteMatch, Link, Switch, Route} from "react-router-do
 import IndividualEmailPage from './IndividualEmailPage'
 
 let HomePage = ({emails}) => {
-
+    console.log("emails: ", emails )
     let match = useRouteMatch();
     let emailList = emails.map(email => {
         return (

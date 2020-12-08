@@ -1,15 +1,17 @@
-import React, {Component} from 'react'
+import React, {Component, useState} from 'react'
 import {BrowserRouter as Router, Link, Switch, Route} from "react-router-dom";
 import HomePage from "./Components/HomePage";
+import Search from "./Components/Search"
+
 
 class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            emailData: []
-
-        }
-
+            emailData: [],
+            search: ''
+        }   
+    
     }
 
     async componentDidMount() {
@@ -28,6 +30,7 @@ class App extends Component {
                         <ul>
                             <li><Link to={'/AllEmails'}>All Emails</Link></li>
                         </ul>
+                        <Search/>
                     </nav>
 
                     <Switch>

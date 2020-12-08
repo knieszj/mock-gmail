@@ -7,6 +7,11 @@ const IndividualEmailPage = ({data}) => {
     
     return (
         <>
+            <div>{email.id}</div>
+            <div>{email.date}</div>
+            <div>{email.message}</div>
+            <div>{email.recipient}</div>
+            <div>{email.sender}</div>
             <div>{email.subject}</div>
         </>
     )
