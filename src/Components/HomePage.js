@@ -13,17 +13,13 @@ let HomePage = ({emails}) => {
                         {email.sender}
                     </div>
                     <div>
-                        |
-                    </div>
-                    <div>
                         {email.subject}
                     </div>
                 </Link>
             </div>
         )
     })
-
-
+  
     return (
         <>
             <BrowserRouter>
@@ -31,13 +27,9 @@ let HomePage = ({emails}) => {
                     <Route path={`${match.url}/:emailsId`}>
                         <IndividualEmailPage data={emails}/>
                     </Route>
-                    <Route>
-                        {emailList}
-                    </Route>
+          
                 </Switch>
-
-                <h1>Bob</h1>
-                {emailList}
+                {emailList} 
             </BrowserRouter>
 
         </>
