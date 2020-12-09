@@ -1,4 +1,4 @@
-import React, {Component, useState} from 'react'
+import React, {Component} from 'react'
 import {BrowserRouter as Router, Link, Switch, Route} from "react-router-dom";
 import HomePage from "./Components/HomePage";
 import SendEmails from "./Components/SendEmails";
@@ -13,7 +13,6 @@ class App extends Component {
             value: '',
             searchValue: null,
         }
-
     }
 
     async componentDidMount() {
@@ -29,28 +28,27 @@ class App extends Component {
     }
 
     render() {
+        // eslint-disable-next-line array-callback-return
         const emailItems = this.state.emailData.filter((emails) => {
             if (this.state.searchValue == null) {
                 return emails
             } else if (emails.subject.toLowerCase().includes(this.state.searchValue.toLowerCase()) ||
                 emails.sender.toLowerCase().includes(this.state.searchValue.toLowerCase())) {
-                    return emails
+                return emails
             }
         }).map(email => {
             return (
                 <div key={email.id} id={'email-list-id'}>
-                    {/*<Link to={`${match.url}/${email.id}`}>*/}
-                        <div id={'email-sender'}>
-                            {email.sender}
-                        </div>
-                        <div id={'email-subject'}>
-                            {email.subject}
-                        </div>
-                    {/*</Link>*/}
+                    {/*{console.log("email id: ", email.id)}*/}
+                    <div id={'email-sender'}>
+                        {email.sender}
+                    </div>
+                    <div id={'email-subject'}>
+                        {email.subject}
+                    </div>
                 </div>
             )
         })
-
 
         return (
             <>
@@ -69,7 +67,8 @@ class App extends Component {
                             <SendEmails/>
                         </Route>
                         <Route path={'/SearchEmails'}>
-                            <input type={'text'} placeholder={'Search by subject or sender'} onChange={(event => this.searchBox(event))}/>
+                            <input type={'text'} placeholder={'Search by subject or sender'}
+                                   onChange={(event => this.searchBox(event))}/>
                             {emailItems}
                             <SearchEmails/>
                         </Route>
@@ -78,8 +77,6 @@ class App extends Component {
             </>
         );
     }
-
-
 }
 
 export default App;

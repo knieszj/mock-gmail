@@ -21,7 +21,6 @@ let HomePage = ({emails,}) => {
         )
     })
 
-
     return (
         <>
             <BrowserRouter>
