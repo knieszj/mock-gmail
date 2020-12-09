@@ -37,7 +37,6 @@ let HomePage = ({emails,}) => {
                     </Switch>
                     <div id={'email-list'}>
                         {emailList}
-                        {/*{filteredEmailList}*/}
                     </div>
                 </div>
             </BrowserRouter>

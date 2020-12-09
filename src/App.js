@@ -1,7 +1,8 @@
 import React, {Component, useState} from 'react'
 import {BrowserRouter as Router, Link, Switch, Route} from "react-router-dom";
 import HomePage from "./Components/HomePage";
-
+import SendEmails from "./Components/SendEmails";
+import './App.css'
 
 class App extends Component {
     constructor(props) {
@@ -11,13 +12,14 @@ class App extends Component {
             value: '',
             emailMessage: [
                 {
-                    sender: '',
-                    recipient: '',
-                    subject: '',
-                    message: '',
+                    sender: 'fakeSender',
+                    recipient: 'fakeRecipient',
+                    subject: 'fakeSubject',
+                    message: 'fakeMessge',
                 }
             ],
             filter: '',
+
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -41,16 +43,19 @@ class App extends Component {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
             }
-        })
-        const emailPostData = await response.json()
-        console.log("emailPostData: " + emailPostData)
+        }).then((response) => response.json())
+    }
 
+    messageBuilder(value){
+        const messagesArray = [...this.state.emailMessage.sender, ...this.state.emailMessage.recipient, ...this.state.emailMessage.subject, value]
+        console.log("The message builder built this: ", messagesArray.join(''))
+        return messagesArray.join('')
     }
 
     handleSubmit(event) {
         event.preventDefault()
         const message = event.target.value;
-        this.sendEmail(message).then(r => console.log("r: " + r))
+        this.sendEmail(this.messageBuilder(message))
     }
 
     handleChange(event) {
@@ -63,30 +68,17 @@ class App extends Component {
         return (
             <>
                 <Router>
-                    <nav>
-                        <ul>
-                            <li><Link to={'/AllEmails'}>All Emails</Link></li>
-                        </ul>
-                        <form onSubmit={this.handleSubmit}>
-                            <input type="text" value={this.state.value} onChange={this.handleChange}/>
-                            <input type="submit" value="Send Note"/>
-                        </form>
-                        <form>
-                            <input type="text" value={this.state.value} onChange={this.handleChange}
-                                   placeholder={'search'}/>
-                        </form>
+                    <nav id={'navigation-bar-styling'}>
+                        <Link to={'/AllEmails'} className={'navbar-link'}>Read Emails</Link>
+                        <Link to={'/SendEmails'} className={'navbar-link'}>Send Emails</Link>
                     </nav>
 
                     <Switch>
                         <Route path={'/AllEmails'}>
-                            <HomePage emails={this.state.emailData}
-                                      stateValue={this.state.filter}
-                            />
+                            <HomePage emails={this.state.emailData}/>
                         </Route>
-                        <Route>
-                            <div>
-
-                            </div>
+                        <Route path={'/SendEmails'}>
+                            <SendEmails/>
                         </Route>
                     </Switch>
                 </Router>
