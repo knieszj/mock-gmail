@@ -8,8 +8,8 @@ class SendEmails extends Component {
         this.state = {
             emailMessage:
                 {
-                    sender: 'fakeSender',
-                    recipient: 'fakeRecipient',
+                    sender: 'fakeSender@fakemail.com',
+                    recipient: 'fakeRecipient@fakemail.com',
                     subject: 'fakeSubject',
                     message: 'fakeMessge',
                 }
@@ -23,6 +23,7 @@ class SendEmails extends Component {
 
     messageBuilder(value) {
         const messagesArray = this.state.emailMessage
+        messagesArray.subject = value
         console.log("messagesArray", messagesArray)
         return messagesArray
     }
@@ -35,7 +36,10 @@ class SendEmails extends Component {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
             }
-        }).then((response) => response.json())
+        }).then((response) => {
+            console.log("Send Email Response: ", response.json());
+            return response
+        })
     }
 
     handleSubmit(event) {
