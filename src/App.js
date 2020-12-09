@@ -3,6 +3,7 @@ import {BrowserRouter as Router, Link, Switch, Route} from "react-router-dom";
 import HomePage from "./Components/HomePage";
 import SendEmails from "./Components/SendEmails";
 import './App.css'
+import SearchEmails from "./Components/SearchEmails";
 
 class App extends Component {
     constructor(props) {
@@ -10,22 +11,10 @@ class App extends Component {
         this.state = {
             emailData: [],
             value: '',
-            // emailMessage: [
-            //     {
-            //         sender: 'fakeSender',
-            //         recipient: 'fakeRecipient',
-            //         subject: 'fakeSubject',
-            //         message: 'fakeMessge',
-            //     }
-            // ],
-            filter: '',
-
+            searchValue: null,
         }
-        // this.handleChange = this.handleChange.bind(this);
-        // this.handleSubmit = this.handleSubmit.bind(this);
 
     }
-
 
     async componentDidMount() {
         console.log("component did mount")
@@ -34,43 +23,42 @@ class App extends Component {
         this.setState({emailData: emailData})
     }
 
-
-    // async sendEmail(emailMessage) {
-    //     const response = await fetch('http://localhost:3001/send', {
-    //         method: 'POST',
-    //         body: JSON.stringify(emailMessage),
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //             'Accept': 'application/json'
-    //         }
-    //     }).then((response) => response.json())
-    // }
-    //
-    // messageBuilder(value){
-    //     const messagesArray = [...this.state.emailMessage.sender, ...this.state.emailMessage.recipient, ...this.state.emailMessage.subject, value]
-    //     console.log("The message builder built this: ", messagesArray.join(''))
-    //     return messagesArray.join('')
-    // }
-    //
-    // handleSubmit(event) {
-    //     event.preventDefault()
-    //     const message = event.target.value;
-    //     this.sendEmail(this.messageBuilder(message))
-    // }
-    //
-    // handleChange(event) {
-    //     this.setState({value: event.target.value})
-    //     console.log(event.target.value)
-    // }
-
+    searchBox = (event) => {
+        let searchTerm = event.target.value
+        this.setState({searchValue: searchTerm})
+    }
 
     render() {
+        const emailItems = this.state.emailData.filter((emails) => {
+            if (this.state.searchValue == null) {
+                return emails
+            } else if (emails.subject.toLowerCase().includes(this.state.searchValue.toLowerCase()) ||
+                emails.sender.toLowerCase().includes(this.state.searchValue.toLowerCase())) {
+                    return emails
+            }
+        }).map(email => {
+            return (
+                <div key={email.id} id={'email-list-id'}>
+                    {/*<Link to={`${match.url}/${email.id}`}>*/}
+                        <div id={'email-sender'}>
+                            {email.sender}
+                        </div>
+                        <div id={'email-subject'}>
+                            {email.subject}
+                        </div>
+                    {/*</Link>*/}
+                </div>
+            )
+        })
+
+
         return (
             <>
                 <Router>
                     <nav id={'navigation-bar-styling'}>
                         <Link to={'/AllEmails'} className={'navbar-link'}>Read Emails</Link>
                         <Link to={'/SendEmails'} className={'navbar-link'}>Send Emails</Link>
+                        <Link to={'/SearchEmails'} className={'navbar-link'}>Search Emails</Link>
                     </nav>
 
                     <Switch>
@@ -79,6 +67,11 @@ class App extends Component {
                         </Route>
                         <Route path={'/SendEmails'}>
                             <SendEmails/>
+                        </Route>
+                        <Route path={'/SearchEmails'}>
+                            <input type={'text'} placeholder={'Search by subject or sender'} onChange={(event => this.searchBox(event))}/>
+                            {emailItems}
+                            <SearchEmails/>
                         </Route>
                     </Switch>
                 </Router>
