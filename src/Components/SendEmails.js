@@ -12,9 +12,7 @@ class SendEmails extends Component {
                     recipient: 'fakeRecipient@fakemail.com',
                     subject: 'fakeSubject',
                     message: 'fakeMessge',
-                }
-
-            ,
+                },
             value: 'Two cannibals are eating a clown.  One turns to the other and says, "Does this taste funny to you?"',
         }
         this.handleChange = this.handleChange.bind(this);
