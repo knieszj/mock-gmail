@@ -1,0 +1,48 @@
+#email-list-id {
+    background: antiquewhite;
+    width: 200px;
+    padding: 5px;
+    font-family: sans-serif;
+    border: thin solid #282c34;
+}
+
+#email-list-id:nth-child(odd) {
+    background: beige;
+}
+
+a {
+    text-decoration: none;
+    color: #282c34;
+}
+
+a:visited{
+    text-decoration: none;
+    color: coral;
+}
+
+#email-sender {
+    font-size: small;
+
+}
+
+#email-subject {
+    font-size: small;
+    text-decoration: none;
+}
+
+#home-page-main{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin-top: 10px;
+}
+#individual-email-page{
+    display: flex;
+    flex-direction: column;
+    order: 2;
+}
+#email-list{
+    display: flex;
+    flex-direction: column;
+    order: 1;
+}

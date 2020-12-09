@@ -1,0 +1,51 @@
+#individual-email-div {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    font-family: sans-serif;
+    margin-left: 10px;
+}
+
+#ind-email-header-info{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+}
+#ind-email-header-sender-date{
+    display: flex;
+    flex-direction: row;
+    font-size: medium;
+    margin-right: 20px;
+}
+#ind-individual-email-body{
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+}
+
+#ind-email-id {
+
+}
+
+#ind-email-date {
+
+}
+
+#ind-email-message {
+
+}
+
+#ind-email-recipient {
+    font-size: medium;
+}
+
+#ind-email-sender {
+    margin-right: 30px;
+}
+
+#ind-email-subject {
+    font-size: large;
+    margin-right: 20px;
+    margin-top: 10px;
+}
